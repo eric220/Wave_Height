@@ -14,13 +14,13 @@ if __name__ == "__main__":
             x = threading.Thread(target=nt.retrieve_image, args=(station_id,))
             x.start()
             cnn = mdl.get_cnn()
-            lstm = mdl.get_lstm()
+            #lstm = mdl.get_lstm()
             x.join()
             file_path = [img.glob.glob('Temp_Img/*.jpg').pop(-1)]
-            tensor_stack = img.get_tensors(file_path)
+            tensor_stack = img.get_tensors(file_path[0])
             os.remove(file_path[0])
             cnn_pred = cnn.predict(tensor_stack)
-            print(lstm.predict(cnn_pred) + 2)  #experimentally derived addition???model needs work
+            print(cnn_pred + 2)  #experimentally derived addition???model needs work
         except:
             print(err)
     else:
